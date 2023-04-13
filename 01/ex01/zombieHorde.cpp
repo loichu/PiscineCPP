@@ -3,12 +3,10 @@
 
 Zombie*	zombieHorde(int n, std::string name)
 {
-	Zombie	*zombies = new Zombie[n];
+	Zombie	*zombies = new Zombie[n > 0 ? n : 0];
 
 	for (int i = 0; i < n; ++i)
-	{
-		zombies[i] = Zombie(name);
-		std::cout << "from assignment loop" << std::endl;
-	}
+		zombies[i].setName(name);
+
 	return (zombies);
 }
