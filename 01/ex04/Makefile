@@ -1,6 +1,6 @@
 NAME		:=	sed
 CLASSES		:=	
-CPP_FILES	:=	main.cpp
+CPP_FILES	:=	main.cpp functions.cpp
 
 HPPS		:=	$(CLASSES:=.hpp)
 CPPS		:=	$(CLASSES:=.cpp) $(CPP_FILES)
@@ -9,6 +9,9 @@ OBJS		:=	$(CPPS:.cpp=.o)
 CXX			:=	g++
 CPPFLAGS	:=	-Wall -Wextra -Werror
 CXXFLAGS	:=	-std=c++98 -pedantic
+
+PWD			:= 	$(shell pwd)
+TEST_FILES	:=	empty_file one_line_file big_file invalid_line_file file_read file_written /private/etc/bashrc dir $(PWD)/main.cpp
 
 all:		$(NAME)
 
@@ -23,4 +26,8 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+test:		
+			bash ./generate_files.sh $(TEST_FILES)
+			bash ./test.sh $(TEST_FILES)
+
+.PHONY:		all clean fclean re test
