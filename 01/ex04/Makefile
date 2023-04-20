@@ -11,7 +11,10 @@ CPPFLAGS	:=	-Wall -Wextra -Werror
 CXXFLAGS	:=	-std=c++98 -pedantic
 
 PWD			:= 	$(shell pwd)
-TEST_FILES	:=	empty_file one_line_file big_file invalid_line_file file_read file_written /private/etc/bashrc dir $(PWD)/main.cpp
+TEST_DIR	:=	test_files
+TEST_FILES	:=	$(addprefix $(TEST_DIR)/, \
+				empty_file one_line_file big_file invalid_line_file file_read file_written dir) \
+				/private/etc/bashrc $(PWD)/main.cpp
 
 all:		$(NAME)
 
@@ -20,14 +23,16 @@ $(NAME):	$(OBJS) $(HPPS)
 
 clean:
 			@rm -f $(OBJS)
+			@rm -rf $(TEST_DIR)
 
 fclean:		clean
 			@rm -f $(NAME)
 
 re:			fclean all
 
-test:		
-			bash ./generate_files.sh $(TEST_FILES)
-			bash ./test.sh $(TEST_FILES)
+test:		clean all
+			@mkdir $(TEST_DIR)
+			@bash ./generate_files.sh $(TEST_FILES)
+			@bash ./test.sh $(TEST_FILES) $(TEST_DIR)
 
 .PHONY:		all clean fclean re test
