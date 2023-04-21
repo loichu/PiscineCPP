@@ -14,7 +14,7 @@ PWD			:= 	$(shell pwd)
 TEST_DIR	:=	test_files
 TEST_FILES	:=	$(addprefix $(TEST_DIR)/, \
 				empty_file one_line_file big_file invalid_line_file file_read file_written dir) \
-				/private/etc/bashrc $(PWD)/main.cpp
+				/private/etc/krb5.keytab main.cpp
 
 all:		$(NAME)
 
@@ -32,7 +32,7 @@ re:			fclean all
 
 test:		clean all
 			@mkdir $(TEST_DIR)
-			@bash ./generate_files.sh $(TEST_FILES)
+			@bash ./generate_files.sh $(TEST_FILES) $(TEST_DIR)
 			@bash ./test.sh $(TEST_FILES) $(TEST_DIR)
 
 .PHONY:		all clean fclean re test
