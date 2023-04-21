@@ -2,7 +2,7 @@
 
 std::string	read_file(std::string filename)
 {
-	std::ifstream	file(filename);
+	std::ifstream	file(filename.c_str());
 	std::string		content;
 	char			c;
 
@@ -17,7 +17,7 @@ std::string	read_file(std::string filename)
 		while (file.get(c)) content.append(1, c);
 		file.close();
 	}
-	catch (std::ifstream::failure e)
+	catch (std::ifstream::failure &e)
 	{
     	std::cerr << "Error while reading or closing file" << std::endl;
 		exit(EXIT_FAILURE);
@@ -27,7 +27,7 @@ std::string	read_file(std::string filename)
 
 void	write_file(std::string filename, std::string content)
 {
-	std::ofstream	file(filename);
+	std::ofstream	file(filename.c_str());
 
 	if (!file)
 	{

@@ -16,10 +16,10 @@ OK="\x1b[32;49mOK\x1b[0m"
 KO="\x1b[31;49mKO\x1b[0m"
 
 check_result () {
-	echo -n "" > $TEST_DIR/$1.replace
+	echo -n "" > $1.replace
 	./sed "$1" "$2" "$3"
-	perl -pe "s/$2/$3/g" $1 > $TEST_DIR/$1.check
-	if diff $TEST_DIR/$1.replace $TEST_DIR/$1.check > $TEST_DIR/"$1-$2-$3".diff; then
+	perl -pe "s/$2/$3/g" $1 > $1.check
+	if diff $1.replace $1.check > "$1-$2-$3".diff; then
 		echo -ne $OK ' '
 	else
 		echo -ne $KO ' '
