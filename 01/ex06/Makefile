@@ -23,4 +23,11 @@ fclean:		clean
 
 re:			fclean all
 
+test:		all
+			./$(NAME) DEBUG
+			./$(NAME) INFO
+			./$(NAME) WARNING
+			./$(NAME) ERROR
+			./$(NAME) sjdghfjgh
+
 .PHONY:		all clean fclean re
