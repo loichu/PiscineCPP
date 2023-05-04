@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Fixed.hpp"
 
 const int Fixed::_dec_bits = 8;
@@ -14,6 +13,18 @@ Fixed::Fixed(const Fixed &t)
 	*this = t;
 } 
 
+Fixed::Fixed(const int v)
+{
+	std::cout << "Int constructor called" << std::endl;
+	_raw = v << _dec_bits;
+}
+
+Fixed::Fixed(const float v)
+{
+	std::cout << "Float constructor called" << std::endl;
+	_raw = (int)roundf(v * (1 << _dec_bits));
+}
+
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
@@ -26,14 +37,29 @@ Fixed &	Fixed::operator = (const Fixed &t)
 	return *this;
 }
 
+std::ostream &operator << (std::ostream &stream, Fixed const &f)
+{
+	return stream << f.toFloat();
+}
+
+float	Fixed::toFloat() const
+{
+	return (float)_raw / (1 << _dec_bits);
+}
+
+int		Fixed::toInt() const
+{
+	return _raw >> _dec_bits;
+}
+
 int		Fixed::getRawBits() const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	//std::cout << "getRawBits member function called" << std::endl;
 	return _raw;
 }
 
 void	Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
+	//std::cout << "setRawBits member function called" << std::endl;
 	_raw = raw;
 }
