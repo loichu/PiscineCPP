@@ -23,6 +23,9 @@ int main(void)
 	clap1.beRepaired(3);
 	clap1.beRepaired(3);
 	clap1.attack("an Apple fanboy");
+	clap1.attack("an Apple fanboy");
+	clap1.attack("an Apple fanboy");
+	clap1.beRepaired(3);
 	clap1.takeDamage(10);
 	clap1.takeDamage(10);
 	clap1.beRepaired(3);
