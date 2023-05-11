@@ -1,5 +1,5 @@
 NAME		:=	animal
-CLASSES		:=	Animal WrongAnimal Cat WrongCat #Dog
+CLASSES		:=	Animal WrongAnimal Cat WrongCat Dog
 CPP_FILES	:=	main.cpp
 
 HPPS		:=	$(CLASSES:=.hpp)

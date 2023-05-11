@@ -10,7 +10,7 @@ class Animal
 	Animal();
 	Animal(const Animal & animal);
 
-	~Animal();
+	virtual ~Animal();
 
 	Animal & operator = (const Animal & animal);
 
