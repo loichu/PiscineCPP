@@ -6,8 +6,8 @@ HPPS		:=	$(CLASSES:=.hpp)
 CPPS		:=	$(CLASSES:=.cpp) $(CPP_FILES)
 OBJS		:=	$(CPPS:.cpp=.o)
 
-CXX			:=	c++
-CPPFLAGS	:=	-Wall -Wextra -Werror
+CXX			:=	c++ #scan-build clang #c++
+CPPFLAGS	:=	-Wall -Wextra -Werror -fsanitize=leak -g
 CXXFLAGS	:=	-std=c++98 -pedantic
 
 all:		$(NAME)

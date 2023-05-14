@@ -7,7 +7,7 @@ class Dog: public Animal
 {
 	public:
 	Dog(void);
-	Dog(const Dog & cat);
+	Dog(const Dog & dog);
 
 	~Dog(void);
 

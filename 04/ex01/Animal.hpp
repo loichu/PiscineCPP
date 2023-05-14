@@ -4,6 +4,8 @@
 # include <string>
 # include <iostream>
 
+# include "Brain.hpp"
+
 class Animal
 {
 	public:
@@ -14,12 +16,14 @@ class Animal
 
 	Animal & operator = (const Animal & animal);
 
-	std::string	getType(void) const;
+	std::string		getType(void) const;
 
-	virtual void makeSound(void) const;
+	virtual void 	makeSound(void) const;
+	Brain *			getBrain(void) const;
 
 	protected:
 	std::string	_type;
+	Brain *		_brain;
 };
 
 #endif
