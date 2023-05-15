@@ -26,7 +26,7 @@ void	compare_animals(const Animal * animal1, const Animal * animal2)
 	{
 		if (ideas1[i] != ideas2[i])
 		{
-			std::cout << ideas1[i] << "\t" << ideas2[i] << std::endl;
+			//std::cout << ideas1[i] << "\t" << ideas2[i] << std::endl;
 			same_content = false;
 		}
 	}
@@ -41,14 +41,9 @@ int main()
 {
 	const Animal* i = new Cat();
 	const Animal* j = new Dog();
-	Animal* k = new Cat();
-	Animal* l = new Dog();
-	
-	*k = *i;
-	*l = *j;
 
-	std::cout << k->getType() << std::endl;
-	std::cout << l->getType() << std::endl;
+	std::cout << i->getType() << std::endl;
+	std::cout << j->getType() << std::endl;
 
 	std::cout << std::endl;
 
@@ -57,22 +52,9 @@ int main()
 
 	std::cout << std::endl;
 
-	std::cout << "Compare i with k" << std::endl;
-	compare_animals(i, k);
-
-	std::cout << std::endl;
-
-	std::cout << "Compare j with l" << std::endl;
-	compare_animals(j, l);
-
-	std::cout << std::endl;
-
 	delete i;
-	delete j;
-	delete k;
-	delete l;
 
-	std::cout << "\n" << std::endl;
+	std::cout << std::endl;
 
 	Animal * animals[NB_ANIMALS];
 	for (int i = 0; i < NB_ANIMALS; ++i)
@@ -89,11 +71,34 @@ int main()
 
 	std::cout << std::endl;
 
-	Dog basic;
 	{
-		Dog tmp = basic;
-		std::cout << tmp.getType() << std::endl;
+		Dog basic;
+		{
+			Dog tmp = basic;
+			std::cout << tmp.getType() << std::endl;
+		}
 	}
+
+	std::cout << std::endl;
+
+	Dog basic;
+	Dog tmp = basic;
+
+	std::cout << std::endl;
+
+	std::cout << "Compare basic with tmp" << std::endl;
+	compare_animals(&basic, &tmp);
+
+	std::cout << std::endl;
+
+	std::cout << "Compare basic with j" << std::endl;
+	compare_animals(&basic, j);
+
+	std::cout << std::endl;
+
+	delete j;
+
+	std::cout << std::endl;
 
 	return 0;
 }

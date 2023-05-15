@@ -37,7 +37,7 @@ Brain & Brain::operator = (const Brain & brain)
 	for (int i = 0; i < NB_IDEAS; ++i)
 	{
 		_ideas[i] = brain._ideas[i];
-		std::cout << _ideas[i] << "\t" << brain._ideas[i] << std::endl;
+		//std::cout << _ideas[i] << "\t" << brain._ideas[i] << std::endl;
 	}
 	return *this;
 }
