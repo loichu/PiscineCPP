@@ -14,16 +14,15 @@ class Animal
 
 	virtual ~Animal();
 
-	Animal & operator = (const Animal & animal);
+	virtual Animal & operator = (const Animal & animal);
 
 	std::string		getType(void) const;
 
 	virtual void 	makeSound(void) const = 0;
-	Brain *			getBrain(void) const;
+	virtual Brain *	getBrain(void) const = 0;
 
 	protected:
 	std::string	_type;
-	Brain *		_brain;
 };
 
 #endif

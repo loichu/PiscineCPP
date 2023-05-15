@@ -25,7 +25,10 @@ void	compare_animals(const Animal * animal1, const Animal * animal2)
 	for (int i = 0; i < NB_IDEAS; ++i)
 	{
 		if (ideas1[i] != ideas2[i])
+		{
+			std::cout << ideas1[i] << "\t" << ideas2[i] << std::endl;
 			same_content = false;
+		}
 	}
 
 	if (same_content)
@@ -43,6 +46,9 @@ int main()
 	
 	*k = *i;
 	*l = *j;
+
+	std::cout << k->getType() << std::endl;
+	std::cout << l->getType() << std::endl;
 
 	std::cout << std::endl;
 
@@ -81,7 +87,13 @@ int main()
 		delete animals[i];
 	}
 
-	//Animal	animal;
+	std::cout << std::endl;
+
+	Dog basic;
+	{
+		Dog tmp = basic;
+		std::cout << tmp.getType() << std::endl;
+	}
 
 	return 0;
 }
