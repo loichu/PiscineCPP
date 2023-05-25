@@ -19,11 +19,10 @@ class Animal
 	std::string		getType(void) const;
 
 	virtual void 	makeSound(void) const;
-	Brain *			getBrain(void) const;
+	//virtual Brain *	getBrain(void) const;
 
 	protected:
 	std::string	_type;
-	Brain *		_brain;
 };
 
 #endif

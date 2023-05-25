@@ -11,7 +11,13 @@ class Cat: public Animal
 
 	~Cat(void);
 
-	void	makeSound(void) const;
+	Cat & operator = (const Cat & cat);
+
+	void		makeSound(void) const;
+	Brain *		getBrain(void) const;
+
+	private:
+	Brain * _brain;
 };
 
 #endif

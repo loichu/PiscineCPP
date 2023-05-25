@@ -26,6 +26,7 @@ Brain::Brain(const Brain & brain)
 	std::cout << "Brain copy constructor" << std::endl;
 	*this = brain;
 }
+
 Brain::~Brain(void)
 {
 	std::cout << "Brain destructor" << std::endl;
@@ -34,7 +35,10 @@ Brain::~Brain(void)
 Brain & Brain::operator = (const Brain & brain)
 {
 	for (int i = 0; i < NB_IDEAS; ++i)
+	{
 		_ideas[i] = brain._ideas[i];
+		//std::cout << _ideas[i] << "\t" << brain._ideas[i] << std::endl;
+	}
 	return *this;
 }
 
