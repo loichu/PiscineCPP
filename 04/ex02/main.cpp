@@ -47,12 +47,8 @@ int main()
 
 	std::cout << std::endl;
 
-	std::cout << "Compare i with j" << std::endl;
-	compare_animals(i, j);
-
-	std::cout << std::endl;
-
 	delete i;
+	delete j;
 
 	std::cout << std::endl;
 
@@ -76,29 +72,35 @@ int main()
 		{
 			Dog tmp = basic;
 			std::cout << tmp.getType() << std::endl;
+
+			std::cout << std::endl;
+
+			std::cout << "[DOG] Compare basic with tmp" << std::endl;
+			compare_animals(&basic, &tmp);
+			std::cout << std::endl;
+		}
+	}
+
+
+	std::cout << std::endl;
+
+	{
+		Cat basic;
+		{
+			Cat tmp = basic;
+			std::cout << tmp.getType() << std::endl;
+
+			std::cout << std::endl;
+
+			std::cout << "[CAT] Compare basic with tmp" << std::endl;
+			compare_animals(&basic, &tmp);
+			std::cout << std::endl;
 		}
 	}
 
 	std::cout << std::endl;
 
-	Dog basic;
-	Dog tmp = basic;
-
-	std::cout << std::endl;
-
-	std::cout << "Compare basic with tmp" << std::endl;
-	compare_animals(&basic, &tmp);
-
-	std::cout << std::endl;
-
-	std::cout << "Compare basic with j" << std::endl;
-	compare_animals(&basic, j);
-
-	std::cout << std::endl;
-
-	delete j;
-
-	std::cout << std::endl;
+	//Animal a;
 
 	return 0;
 }
