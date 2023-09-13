@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : _grade(150)
+Bureaucrat::Bureaucrat() : _grade(MIN_GRADE)
 {
 	std::cout << "Bureaucrat default constructor" << std::endl;
 }
@@ -8,6 +8,14 @@ Bureaucrat::Bureaucrat() : _grade(150)
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
 	std::cout << "Bureaucrat name, grade constructor" << std::endl;
+	if (grade > MIN_GRADE)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
+	if (grade < MAX_GRADE)
+	{
+		throw Bureaucrat::GradeTooHighException();
+	}
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat & bureaucrat)
@@ -43,10 +51,24 @@ int                 Bureaucrat::getGrade(void) const
 
 void    Bureaucrat::incrementGrade()
 {
+	if (_grade - 1 < MAX_GRADE)
+	{
+		throw Bureaucrat::GradeTooHighException();
+	}
     _grade--;
 }
 
 void    Bureaucrat::decrementGrade()
 {
+	if (_grade + 1 > MIN_GRADE)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
     _grade++;
+}
+
+std::ostream	&operator<<(std::ostream &out, Bureaucrat const &bureaucrat)
+{
+	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	return (out);
 }
