@@ -57,6 +57,16 @@ int main()
     Bureaucrat  default_bureaucrat;
     print_bureaucrat(&default_bureaucrat);
 
+    Bureaucrat  copy_a("Copy A", 100);
+    print_bureaucrat(&copy_a);
+    Bureaucrat  copy_b = copy_a;
+    print_bureaucrat(&copy_b);
+
+    Bureaucrat  copy_c("Copy C", 70);
+    print_bureaucrat(&copy_c);
+    copy_c = copy_a;
+    print_bureaucrat(&copy_c);
+
     Bureaucrat  *  ok_bureaucrat = fail_safe_bureaucrat("OK", 20);
     print_bureaucrat(ok_bureaucrat);
 
@@ -79,16 +89,6 @@ int main()
 
     safe_decrement(min_grade);
     print_bureaucrat(&min_grade);
-
-    Bureaucrat  copy_a("Copy A", 100);
-    print_bureaucrat(&copy_a);
-    Bureaucrat  copy_b = copy_a;
-    print_bureaucrat(&copy_b);
-
-    Bureaucrat  copy_c("Copy C", 70);
-    print_bureaucrat(&copy_c);
-    copy_c = copy_a;
-    print_bureaucrat(&copy_c);
 
     delete ok_bureaucrat;
     delete too_low_bureaucrat;
