@@ -7,7 +7,9 @@ Bureaucrat::Bureaucrat() : _grade(MIN_GRADE)
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-	std::cout << "Bureaucrat name, grade constructor" << std::endl;
+	std::cout << "Creating Bureaucrat " << name
+			  << ", Grade: " << grade
+			  << std::endl;
 	if (grade > MIN_GRADE)
 	{
 		throw Bureaucrat::GradeTooLowException();
@@ -18,7 +20,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 	}
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat & bureaucrat)
+Bureaucrat::Bureaucrat(const Bureaucrat & bureaucrat) : _name(bureaucrat._name)
 {
 	std::cout << "Bureaucrat copy constructor" << std::endl;
 	*this = bureaucrat;
@@ -31,7 +33,7 @@ Bureaucrat::~Bureaucrat(void)
 
 Bureaucrat & Bureaucrat::operator = (const Bureaucrat & bureaucrat)
 {
-    _grade = bureaucrat.getGrade();
+    _grade = bureaucrat._grade;
 	return *this;
 }
 
@@ -69,6 +71,6 @@ void    Bureaucrat::decrementGrade()
 
 std::ostream	&operator<<(std::ostream &out, Bureaucrat const &bureaucrat)
 {
-	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	out << "Bureaucrat " << bureaucrat.getName() << ", grade " << bureaucrat.getGrade();
 	return (out);
 }
