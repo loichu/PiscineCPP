@@ -98,3 +98,31 @@ void Bureaucrat::signForm(AForm &form)
 				  << std::endl;
 	}
 }
+
+void Bureaucrat::executeForm(AForm &form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << getName() << " executed " << form.getName() << std::endl;
+	}
+	catch (AForm::GradeTooLowException & e)
+	{
+		std::cout << getName() << " couldn't execute " << form.getName()
+				  << " because " << getName() << "'s grade is too low"
+				  << " (" << getGrade() << " but " << form.getGradeExec() << " required)"
+				  << std::endl;
+	}
+	catch (AForm::NotSignedException & e)
+	{
+		std::cout << getName() << " couldn't execute " << form.getName()
+				  << " because it is not signed"
+				  << std::endl;
+	}
+	catch (std::exception & e)
+	{
+		std::cout << getName() << " couldn't sign " << form.getName()
+				  << " because something unexpected happend"
+				  << std::endl;
+	}
+}

@@ -1,5 +1,5 @@
 NAME		:=	bureaucrat
-CLASSES		:=	Bureaucrat AForm
+CLASSES		:=	Bureaucrat AForm ShrubberyCreationForm #RobotomyRequestForm PresidentialPardonForm
 CPP_FILES	:=	main.cpp
 
 HPPS		:=	$(CLASSES:=.hpp)

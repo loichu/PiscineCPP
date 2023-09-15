@@ -70,6 +70,16 @@ void AForm::beSigned(Bureaucrat &bureaucrat)
 	_signed = true;
 }
 
+void AForm::execute(Bureaucrat const &executor) const
+{
+	if (executor.getGrade() > getGradeExec())
+		throw GradeTooLowException();
+	if (!_signed)
+		throw NotSignedException();
+	std::cout << "Execute action" << std::endl;
+	action();
+}
+
 std::ostream &operator<<(std::ostream &out, AForm const &form)
 {
 	out << (form.getSigned() ? "\033[1;32m" : "\033[1;31m")
