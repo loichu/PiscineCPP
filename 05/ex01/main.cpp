@@ -84,6 +84,15 @@ int main()
     copy_c = copy_a;
     print_form(&copy_c);
 
+    Form a_form("A form", 30, 20);
+    print_form(&a_form);
+
+    too_low.signForm(a_form);
+    print_form(&a_form);
+
+    ok.signForm(a_form);
+    print_form(&a_form);
+
     delete ok_form;
     delete too_low_exec_form;
     delete too_low_sign_form;

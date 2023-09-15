@@ -74,3 +74,27 @@ std::ostream	&operator<<(std::ostream &out, Bureaucrat const &bureaucrat)
 	out << "Bureaucrat " << bureaucrat.getName() << ", grade " << bureaucrat.getGrade();
 	return (out);
 }
+
+
+void Bureaucrat::signForm(Form &form)
+{
+	std::cout << getName();
+	try
+	{
+		form.beSigned(*this);
+		std::cout << " signed " << form.getName() << std::endl;
+	}
+	catch (Form::GradeTooLowException & e)
+	{
+		std::cout << " couldn't sign " << form.getName()
+				  << " because " << getName() << "'s grade is too low"
+				  << " (" << getGrade() << " but " << form.getGradeSign() << " required)"
+				  << std::endl;
+	}
+	catch (std::exception & e)
+	{
+		std::cout << getName() << " couldn't sign " << form.getName()
+				  << " because something unexpected happend"
+				  << std::endl;
+	}
+}
