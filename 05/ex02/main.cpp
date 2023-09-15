@@ -1,25 +1,25 @@
-#include "Form.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "AForm.hpp"
 
-Form  *  fail_safe_form(std::string name, int grade_sign, int grade_exec)
+AForm  *  fail_safe_form(std::string name, int grade_sign, int grade_exec)
 {
     try {
-        Form * form = new Form(name, grade_sign, grade_exec);
+        AForm * form = new AForm(name, grade_sign, grade_exec);
         return form;
     } 
-    catch (Form::GradeTooHighException & e)
+    catch (AForm::GradeTooHighException & e)
     {
         std::cout << "Grade is too high" << std::endl;
         return NULL;
     }
-    catch (Form::GradeTooLowException & e)
+    catch (AForm::GradeTooLowException & e)
     {
         std::cout << "Grade is too low" << std::endl;
         return NULL;
     }
 }
 
-void    try_sign(Form & form, Bureaucrat & bureaucrat)
+void    try_sign(AForm & form, Bureaucrat & bureaucrat)
 {
     try
     {
@@ -32,42 +32,42 @@ void    try_sign(Form & form, Bureaucrat & bureaucrat)
     }
 }
 
-void    print_form(Form * form)
+void    print_form(AForm * form)
 {
     if (form)
         std::cout << *form << "\n" << std::endl;
     else
-        std::cout << "Form is NULL\n" << std::endl;
+        std::cout << "AForm is NULL\n" << std::endl;
 }
 
 int main()
 {
-    Form  default_form;
+    AForm  default_form;
     print_form(&default_form);
 
-    Form  copy_a("Copy A", 100, 100);
+    AForm  copy_a("Copy A", 100, 100);
     print_form(&copy_a);
-    Form  copy_b = copy_a;
+    AForm  copy_b = copy_a;
     print_form(&copy_b);
 
-    Form  copy_c("Copy C", 70, 70);
+    AForm  copy_c("Copy C", 70, 70);
     print_form(&copy_c);
     copy_c = copy_a;
     print_form(&copy_c);
 
-    Form  *  ok_form = fail_safe_form("OK", 20, 20);
+    AForm  *  ok_form = fail_safe_form("OK", 20, 20);
     print_form(ok_form);
 
-    Form  *  too_low_sign_form = fail_safe_form("Too Low Sign", 200, 20);
+    AForm  *  too_low_sign_form = fail_safe_form("Too Low Sign", 200, 20);
     print_form(too_low_sign_form);
 
-    Form  *  too_low_exec_form = fail_safe_form("Too Low Exec", 20, 200);
+    AForm  *  too_low_exec_form = fail_safe_form("Too Low Exec", 20, 200);
     print_form(too_low_exec_form);
 
-    Form  *  too_high_sign_form = fail_safe_form("Too High Sign", 0, 10);
+    AForm  *  too_high_sign_form = fail_safe_form("Too High Sign", 0, 10);
     print_form(too_high_sign_form);
 
-    Form  *  too_high_exec_form = fail_safe_form("Too High Exec", 10, 0);
+    AForm  *  too_high_exec_form = fail_safe_form("Too High Exec", 10, 0);
     print_form(too_high_exec_form);
 
     Bureaucrat too_low("Too Low", 100);
@@ -84,7 +84,7 @@ int main()
     copy_c = copy_a;
     print_form(&copy_c);
 
-    Form a_form("A form", 30, 20);
+    AForm a_form("A form", 30, 20);
     print_form(&a_form);
 
     too_low.signForm(a_form);

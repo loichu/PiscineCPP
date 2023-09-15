@@ -1,5 +1,5 @@
 NAME		:=	bureaucrat
-CLASSES		:=	Bureaucrat Form
+CLASSES		:=	Bureaucrat AForm
 CPP_FILES	:=	main.cpp
 
 HPPS		:=	$(CLASSES:=.hpp)
