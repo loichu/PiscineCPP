@@ -1,5 +1,5 @@
-#ifndef FORM_H
-# define FORM_H
+#ifndef SHRUBBERY_CREATION_FORM_H
+# define SHRUBBERY_CREATION_FORM_H
 
 # include <fstream>
 # include "AForm.hpp"
