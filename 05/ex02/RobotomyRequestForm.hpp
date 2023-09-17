@@ -1,5 +1,5 @@
 #ifndef ROBOTOMY_REQUEST_FORM_H
-# define FORM_H
+# define ROBOTOMY_REQUEST_FORM_H
 
 # include <cstdlib>
 # include <ctime>

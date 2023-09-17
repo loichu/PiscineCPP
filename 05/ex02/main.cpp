@@ -1,5 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 void    test_and_sign_form(AForm & form, Bureaucrat & signer, Bureaucrat & wrong_executor)
 {
@@ -13,7 +14,7 @@ int main()
 {
     Bureaucrat  signer("Universal Signer", 1);
     Bureaucrat  too_low("Too Low", 138);
-    Bureaucrat  ok("OK", 24);
+    Bureaucrat  ok("OK", 5);
 
     ShrubberyCreationForm   shrubbery_form("Target A");
     test_and_sign_form(shrubbery_form, signer, too_low);
@@ -25,4 +26,8 @@ int main()
     ok.executeForm(robotomy_form);
     ok.executeForm(robotomy_form);
     ok.executeForm(robotomy_form);
+
+    PresidentialPardonForm  presidential_form("Target C");
+    test_and_sign_form(presidential_form, signer, too_low);
+    ok.executeForm(presidential_form);
 }
