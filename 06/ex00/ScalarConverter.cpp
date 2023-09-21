@@ -2,11 +2,29 @@
 
 void ScalarConverter::convert(std::string str)
 {
-    // bool is_char = (str.length() == 1 && std::isprint(str[0]));
+    // Just for inf
+    size_t  inf_pos = str.find("inf");
+    if (inf_pos != std::string::npos)
+    {
+        if (inf_pos == 0 || (inf_pos == 1 && str[0] == '+'))
+        {
+            std::cout << "char: out-of-range" << std::endl;
+            std::cout << "int: out-of-range" << std::endl;
+            std::cout << "float: +inff" << std::endl;
+            std::cout << "double: +inf" << std::endl;
+            return;
+        }
+        else if (inf_pos == 1 && str[0] == '-')
+        {
+            std::cout << "char: out-of-range" << std::endl;
+            std::cout << "int: out-of-range" << std::endl;
+            std::cout << "float: -inff" << std::endl;
+            std::cout << "double: -inf" << std::endl;
+            return;
+        }
+    }
 
-    // if (is_char)
-    //     std::cout << "char: " << str[0] << std::endl;
-
+    // Standard execution
     try
     {
         double number   = getNumber(str);
@@ -32,16 +50,15 @@ void ScalarConverter::convert(std::string str)
 
         // FLOAT
         if (number >= -std::numeric_limits<float>::max() && number <= std::numeric_limits<float>::max())
-            std::cout << "float: " //<< std::fixed
-                                   << static_cast<float>(number)
+            std::cout << "float: " << static_cast<float>(number)
                                    << (std::fmod(number, 1) ? "f" : ".0f")
                                    << std::endl;
         else
             std::cout << "float: out-of-range" << std::endl;
 
         // DOUBLE
-        std::cout << "double: " //<< std::fixed
-                  << static_cast<double>(number)
+        std::cout << "double: "
+                  << number
                   << (std::fmod(number, 1) ? "" : ".0")
                   << std::endl;
         
@@ -95,80 +112,3 @@ double ScalarConverter::getNumber(std::string str)
 
     return number;
 }
-
-// char ScalarConverter::getChar(std::string str)
-// {
-//     if (str.length() == 1)
-//         return str[0];
-    
-//     return 0;
-// }
-
-// char ScalarConverter::getChar(double number)
-// {
-//     return 0;
-// }
-
-// ScalarConverter::ScalarConverter() {}
-
-// bool ScalarConverter::isChar(std::string str)
-// {
-//     return str.length() == 1;
-// }
-
-// bool ScalarConverter::isNumber(std::string str)
-// {
-//     return false;
-// }
-
-// bool ScalarConverter::isInt(std::string str)
-// {
-//     int start = str[0] == '-' || str[0] == '+' ? 1 : 0;
-//     for (int i = start; i < str.length(); ++i)
-//     {
-//         if (!std::isdigit(str[i]))
-//             return false;
-//     }
-//     return true;
-// }
-
-// bool ScalarConverter::isFloat(std::string str)
-// {
-//     if (str[str.length() - 1] != 'f')
-//         return false;
-
-//     bool    dec = false;
-//     int     start = str[0] == '-' || str[0] == '+' ? 1 : 0;
-//     for (int i = start; i < str.length() - 1; ++i)
-//     {
-//         if (str[i] == '.')
-//         {
-//             if (dec)
-//                 return false;
-//             else
-//                 dec = true;
-//         }
-//         if (!std::isdigit(str[i]) && str[i] != '.')
-//             return false;
-//     }
-//     return true;
-// }
-
-// bool ScalarConverter::isDouble(std::string str)
-// {
-//     bool    dec = false;
-//     int     start = str[0] == '-' || str[0] == '+' ? 1 : 0;
-//     for (int i = start; i < str.length(); ++i)
-//     {
-//         if (str[i] == '.')
-//         {
-//             if (dec)
-//                 return false;
-//             else
-//                 dec = true;
-//         }
-//         if (!std::isdigit(str[i]) && str[i] != '.')
-//             return false;
-//     }
-//     return dec;
-// }
