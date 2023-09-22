@@ -50,10 +50,11 @@ void    identify(Base & p)
 int main(void)
 {
     std::srand(std::time(NULL));
-    for (int i = 0; i < 50; ++i)
+    for (int i = 0; i < 50000; ++i)
     {
         Base * clas = generate();
         identify(clas);
         identify(*clas);
+        delete clas;
     }
 }
