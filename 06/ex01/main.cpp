@@ -28,7 +28,7 @@ int main()
     test_random_number(-2);
     test_random_number(438957345987349587);
     test_random_number(-438957345987349587);
-    test_random_number(439875838484864.534665);
+    test_random_number((uintptr_t)439875838484864.534665);
     
     std::string can_i_be_serialized = "Can I be serialized ?";
     test_str_pointer((uintptr_t)&can_i_be_serialized);
