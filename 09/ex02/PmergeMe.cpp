@@ -65,3 +65,160 @@ std::vector<int> PmergeMe::copy_range(std::vector<int> A, int from, int to) {
 
 	return res;
 }
+
+std::vector<int> PmergeMe::sort(std::vector<int> & numbers)
+{
+	if (numbers.empty())
+		return numbers;
+	std::vector< std::vector<int> > pairs = PmergeMe::make_pairs(numbers);
+	PmergeMe::sort_each_pair(pairs);
+
+	{
+		std::vector< std::vector<int> >::iterator it_pair;
+		std::cout << "Pairs: " << std::endl;
+		for (it_pair = pairs.begin(); it_pair < pairs.end(); ++it_pair)
+		{
+			std::vector<int>::iterator it_num;
+			for (it_num = it_pair->begin(); it_num < it_pair->end(); ++it_num)
+				std::cout << *it_num << " " << std::flush;
+			std::cout << std::endl;
+		}
+	}
+
+
+	if (pairs.size() == 1)
+		return pairs[0];
+//	if (pairs.size() == 2)
+//	{
+//		if (pairs[0][0] > pairs[1][0])
+//		{
+//			std::vector<int> res(pairs[1]);
+//			res.insert(res.end(), pairs[0].begin(), pairs[0].end());
+//			return res;
+//		}
+//		else
+//		{
+//			std::vector<int> res(pairs[0]);
+//			res.insert(res.end(), pairs[1].begin(), pairs[1].end());
+//			return res;
+//		}
+//	}
+
+
+	// STEP 3: divide pairs in two groups
+	std::vector<int> group_a;
+	std::vector<int> group_b;
+	std::vector< std::vector<int> >::const_iterator it_pair;
+	for (it_pair = pairs.begin(); it_pair < pairs.end(); ++it_pair)
+	{
+		if (it_pair->size() == 2)
+		{
+			group_a.push_back((*it_pair)[0]);
+			group_b.push_back((*it_pair)[1]);
+		}
+		else
+		{
+			group_b.push_back((*it_pair)[0]);
+		}
+	}
+
+	// STEP 4: sort group A recursively to get the main chain
+	std::vector<int> main_chain = sort(group_a);
+
+	std::cout << "Chain:" << std::endl;
+	for (size_t i = 0; i < main_chain.size(); ++i)
+		std::cout << main_chain[i] << " " << std::flush;
+	std::cout << std::endl;
+
+	// STEP 5: insert group B inside A with a binary search insertion.
+	// Because A is sorted, and we insert B that is a bigger number than
+	// the corresponding index in A, we don't need to search further in
+	// the chain. It's quite difficult to track though...
+	std::vector<int>::iterator it_b;
+	for (it_b = group_b.begin(); it_b < group_b.end(); ++it_b)
+	{
+		int min_index = 0;
+		int max_index = main_chain.size();
+		int ins_index = (min_index + max_index) / 2;
+
+		if (*it_b > main_chain[max_index])
+		{
+			main_chain.push_back(*it_b);
+			continue;
+		}
+		if (*it_b < main_chain[min_index])
+		{
+			main_chain.insert(main_chain.begin(), *it_b);
+			continue;
+		}
+
+		while (ins_index != min_index && ins_index != max_index)
+		{
+
+			std::cout << "\nMin: " << min_index << " Max: " << max_index << " Ins: " << ins_index <<  std::endl;
+
+			if (*it_b >= main_chain[ins_index])
+			{
+				std::cout << *it_b << " Gte " << main_chain[ins_index] << std::endl;
+				min_index = ins_index;
+			}
+
+			if (*it_b <= main_chain[ins_index])
+			{
+				std::cout << *it_b << " Lte " << main_chain[ins_index] << std::endl;
+				max_index = ins_index;
+			}
+
+			ins_index = (min_index + max_index) / 2;
+
+			std::cout << "Min: " << min_index << " Max: " << max_index << " Ins: " << ins_index << std::endl ;
+
+		}
+		std::cout << "Insert " << *it_b << std::endl;
+		main_chain.insert(main_chain.begin() + ins_index, *it_b);
+	}
+
+	return main_chain;
+}
+
+// STEP 1: divide into pairs
+std::vector< std::vector<int> > PmergeMe::make_pairs(const std::vector<int> & numbers)
+{
+	std::vector< std::vector<int> > pairs;
+	std::vector<int>::const_iterator it_num = numbers.begin();
+
+	for (; it_num < numbers.end(); ++it_num)
+	{
+		std::vector<int>::const_iterator it_even = it_num;
+		std::vector<int>::const_iterator it_odd = ++it_num;
+		if (it_odd != numbers.end())
+			pairs.push_back(std::vector<int>(it_even, it_odd + 1));
+		else
+			pairs.push_back(std::vector<int>(1, *it_even));
+	}
+
+	return pairs;
+}
+
+// STEP 2: sort pairs internally
+void PmergeMe::sort_each_pair(std::vector< std::vector<int> > & pairs)
+{
+	std::vector< std::vector<int> >::iterator it_pair;
+	for (it_pair = pairs.begin(); it_pair < pairs.end(); ++it_pair)
+	{
+		if (it_pair->size() == 2 && (*it_pair)[1] < (*it_pair)[0])
+		{
+			int tmp = (*it_pair)[1];
+			(*it_pair)[1] = (*it_pair)[0];
+			(*it_pair)[0] = tmp;
+		}
+	}
+}
+//
+//std::vector<int> PmergeMe::make_group(const std::vector< std::vector<int> > & pairs, int index) {
+//	std::vector<int> group;
+//	std::vector< std::vector<int> >::const_iterator it_pair;
+//	for (it_pair = pairs.begin(); it_pair < pairs.end(); ++it_pair)
+//		group.push_back((*it_pair)[index]);
+//	return group;
+//}
