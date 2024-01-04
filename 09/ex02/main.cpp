@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <ctime>
 #include "PmergeMe.hpp"
+#include "GroupIterator.hpp"
 
 //int main(int argc, char **argv)
 
@@ -70,6 +71,8 @@ int main()
 	std::srand(std::time(NULL));
 	test_sort(10);
 //	test_sort(100);
+
+	test_group_iterator();
 
 
 	return 0;

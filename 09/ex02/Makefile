@@ -1,5 +1,5 @@
 NAME		:=	PmergeMe
-CLASSES		:=	PmergeMe
+CLASSES		:=	PmergeMe GroupIterator
 CPP_FILES	:=	main.cpp
 
 HPPS		:=	$(CLASSES:=.hpp)

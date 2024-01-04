@@ -7,6 +7,7 @@
 
 # include <iostream>
 # include <vector>
+# include "GroupIterator.hpp"
 
 class PmergeMe {
 public:
@@ -27,6 +28,22 @@ private:
 //	static std::vector<int> make_group(const std::vector< std::vector<int> > & pairs, int index);
 
 };
+
+template<typename Iterator>
+void sort_recursive(Iterator start, Iterator end)
+{
+	Iterator it = start;
+	while (it < end)
+		std::cout << *it++ << " " << std::flush;
+	std::cout << std::endl;
+	std::size_t distance = std::distance(start, end);
+	std::cout << "distance: " << distance << std::endl;
+	if (distance < 2)
+		return;
+	test_recursive(make_group_iterator(start, 2),
+	               make_group_iterator(end, 2));
+}
+
 
 
 #endif //EX02_PMERGEME_HPP
