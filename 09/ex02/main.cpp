@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <ctime>
+#include <list>
 #include "PmergeMe.hpp"
 #include "GroupIterator.hpp"
 
@@ -74,6 +75,22 @@ int main()
 
 	test_group_iterator();
 
+	std::cout << "\n\nSTARTING FOR REAL\n" << std::endl;
+
+	static const int numbers[] = {5,1,9,2,3,6,8,4};
+	std::vector<int> vec_numbers (numbers, numbers + sizeof(numbers) / sizeof(numbers[0]));
+	std::list<int> lst_numbers (numbers, numbers + sizeof(numbers) / sizeof(numbers[0]));
+
+	std::vector<int>::iterator vec_it;
+	for (vec_it = vec_numbers.begin(); vec_it < vec_numbers.end(); ++vec_it)
+		std::cout << *vec_it << " " << std::flush;
+	std::cout << std::endl;
+
+	sort_recursive<std::vector<int>::iterator>(vec_numbers.begin(), vec_numbers.end());
+
+	for (vec_it = vec_numbers.begin(); vec_it < vec_numbers.end(); ++vec_it)
+		std::cout << *vec_it << " " << std::flush;
+	std::cout << std::endl;
 
 	return 0;
 }

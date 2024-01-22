@@ -30,17 +30,36 @@ private:
 };
 
 template<typename Iterator>
+void iter_swap(GroupIterator<Iterator> lhs, GroupIterator<Iterator> rhs)
+{
+	std::swap_ranges(lhs.base(), lhs.base() + lhs.size(), rhs.base());
+}
+
+template<typename Iterator>
 void sort_recursive(Iterator start, Iterator end)
 {
-	Iterator it = start;
-	while (it < end)
-		std::cout << *it++ << " " << std::flush;
+	for (Iterator it = start; it < end; ++it)
+		std::cout << *it << " " << std::flush;
 	std::cout << std::endl;
+
 	std::size_t distance = std::distance(start, end);
-	std::cout << "distance: " << distance << std::endl;
+//	std::cout << "distance: " << distance << std::endl;
 	if (distance < 2)
 		return;
-	test_recursive(make_group_iterator(start, 2),
+
+	using std::iter_swap;
+
+	for (Iterator it = start; it != end; it += 2)
+	{
+		std::cout << "Compare " << it[0] << " and " << it[1] << std::endl;
+		if (it[1] < it[0])
+		{
+			std::cout << "Swapped " << it[0] << " and " << it[1] << std::endl;
+			iter_swap(it, it + 1);
+		}
+	}
+
+	sort_recursive(make_group_iterator(start, 2),
 	               make_group_iterator(end, 2));
 }
 

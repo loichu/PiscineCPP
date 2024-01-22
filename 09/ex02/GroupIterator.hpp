@@ -122,6 +122,20 @@ typename GroupIterator<Iterator>::difference_type operator - (
 }
 
 template<typename Iterator>
+GroupIterator<Iterator> operator + (GroupIterator<Iterator> it,
+				                    std::size_t size)
+{
+	return it += size;
+}
+
+template<typename Iterator>
+GroupIterator<Iterator> operator + (std::size_t size,
+				                    GroupIterator<Iterator> it)
+{
+	return it += size;
+}
+
+template<typename Iterator>
 GroupIterator<Iterator> make_group_iterator(Iterator it, std::size_t size)
 {
 	return  GroupIterator<Iterator>(it, size);
