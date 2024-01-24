@@ -77,7 +77,7 @@ int main()
 
 	std::cout << "\n\nSTARTING FOR REAL\n" << std::endl;
 
-	static const int numbers[] = {5,1,9,2,3,6,8,4};
+	static const int numbers[] = {5,1,8,2,3,6,9,4};
 	std::vector<int> vec_numbers (numbers, numbers + sizeof(numbers) / sizeof(numbers[0]));
 	std::list<int> lst_numbers (numbers, numbers + sizeof(numbers) / sizeof(numbers[0]));
 

@@ -3,6 +3,7 @@
 //
 
 
+#include <cstdlib>
 #include "PmergeMe.hpp"
 
 void PmergeMe::insertionSort(std::vector<int> & A, int p, int q) {
@@ -222,3 +223,47 @@ void PmergeMe::sort_each_pair(std::vector< std::vector<int> > & pairs)
 //		group.push_back((*it_pair)[index]);
 //	return group;
 //}
+
+void insert(int i, std::vector<int> & main_chain, size_t max_index)
+{
+	size_t upper_bound = max_index;
+	size_t lower_bound = 0;
+	size_t current_index;
+//	int prev_index = max_index;
+	std::vector<int>::iterator main_chain_it;
+
+	std::cout << "Will insert " << i << std::endl;
+
+	while (upper_bound - lower_bound > 1)
+	{
+		current_index = (upper_bound + lower_bound) / 2;
+		main_chain_it = main_chain.begin();
+		std::advance(main_chain_it, current_index);
+
+		std::cout << lower_bound << " - " << upper_bound << std::endl;
+
+		if (i == *main_chain_it)
+			break;
+
+		if (i < *main_chain_it)
+			upper_bound = current_index;
+		else
+			lower_bound = current_index;
+	}
+
+	main_chain.insert(main_chain_it, i);
+
+}
+
+void insert_without_jacobsthal(std::vector<int> & main_chain, std::vector<int> & pend)
+{
+	std::vector<int>::iterator main_chain_it = main_chain.begin();
+	main_chain.insert(main_chain_it, pend[0]);
+
+	size_t i = 0;
+	while (i < pend.size())
+	{
+		insert(pend[i], main_chain, i * 2);
+		i += 1;
+	}
+}
