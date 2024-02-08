@@ -8,6 +8,8 @@
 # include <iostream>
 # include <vector>
 #include <list>
+#include <algorithm>
+#include <utility>
 # include "GroupIterator.hpp"
 # include "SortedNumbers.hpp"
 
@@ -38,14 +40,14 @@ void iter_swap(GroupIterator<Iterator> lhs, GroupIterator<Iterator> rhs)
 }
 
 //template<typename Iterator>
-void insert_without_jacobsthal(std::vector<int> & main_chain, std::vector<int> & pend);
+//void insert_without_jacobsthal(std::vector<int> & main_chain, std::vector<int> & pend);
 
-template<typename Iterator>
-Iterator next(Iterator it)
-{
-	std::advance(it, 1);
-	return it;
-}
+//template<typename Iterator>
+//Iterator next(Iterator it)
+//{
+//	std::advance(it, 1);
+//	return it;
+//}
 
 template<typename Iterator>
 void sort_recursive(Iterator start, Iterator end) {
@@ -131,6 +133,13 @@ void sort_recursive(Iterator start, Iterator end) {
 		std::cout << *ins_it << " ";
 	}
 	std::cout << std::endl;
+
+//	std::vector<typename std::iterator_traits<Iterator>::value_type> cache;
+//	for (ins_it = numbers.begin(); ins_it != numbers.end(); ++ins_it) {
+//		int* begin = ins_it.base();
+//		int* end = begin + numbers.size();
+//		std::move(begin, end, std::back_inserter(cache));
+//	}
 
 //	std::cout << "Pend and main chain created" << std::endl;
 
