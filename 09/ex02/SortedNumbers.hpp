@@ -21,6 +21,7 @@ public:
 	static void addNumber(int i);
 	static std::vector<int> getNumbers();
 	static void resetMaxIndex();
+	static void destroyInstance();
 };
 
 

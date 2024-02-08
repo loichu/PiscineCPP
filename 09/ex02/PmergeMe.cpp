@@ -255,15 +255,15 @@ void insert(int i, std::vector<int> & main_chain, size_t max_index)
 
 }
 
-void insert_without_jacobsthal(std::vector<int> & main_chain, std::vector<int> & pend)
-{
-	std::vector<int>::iterator main_chain_it = main_chain.begin();
-	main_chain.insert(main_chain_it, pend[0]);
-
-	size_t i = 0;
-	while (i < pend.size())
-	{
-		insert(pend[i], main_chain, i * 2);
-		i += 1;
-	}
-}
+//void insert_without_jacobsthal(std::vector<int> & main_chain, std::vector<int> & pend)
+//{
+//	std::vector<int>::iterator main_chain_it = main_chain.begin();
+//	main_chain.insert(main_chain_it, pend[0]);
+//
+//	size_t i = 0;
+//	while (i < pend.size())
+//	{
+//		insert(pend[i], main_chain, i * 2);
+//		i += 1;
+//	}
+//}
